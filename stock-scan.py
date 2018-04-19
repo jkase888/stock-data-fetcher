@@ -11,7 +11,12 @@ DATABASE_URL = os.environ['DATABASE_URL']
 #connect to database
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 cursor = conn.cursor()
-cursor.execute("SELECT * from historical_prices")
+try:
+    cursor.execute("SELECT * from historical_prices")
+except psycopg2.Error as e:
+    print e.pgerror
+    pass
+
 print(cursor.fetchall())
 
 helper = Helper()
