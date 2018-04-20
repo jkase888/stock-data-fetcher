@@ -1,12 +1,12 @@
 import psycopg2
-from database_private import DatabasePrivateSettings
+#from database_private import DatabasePrivateSettings
 
 class DatabaseGateway():
 
     def __init__(self, env):
-        if (env == "LOCAL"):
-            self.DATABASE_URL = DatabasePrivateSettings.DATABASE_URL
-        else:
+#        if (env == "LOCAL"):
+#            self.DATABASE_URL = DatabasePrivateSettings.DATABASE_URL
+#        else:
             self.DATABASE_URL = os.environ['DATABASE_URL']
 
     def connect(self):
