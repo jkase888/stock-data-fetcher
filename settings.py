@@ -11,7 +11,7 @@ class Helper():
     "XNYS:V", "XTSE:TSGI", "XNYS:COST", "XNYS:ACN", "XTSE:WSP", "XNYS:LOW",
     "XNAS:WDAY", "XNAS:LULU"]
 
-    period = "90d"
+    period = "3m"
 
 
     price_history_front_url = "https://performance.morningstar.com/perform/Performance/stock/exportStockPrice.action?"
