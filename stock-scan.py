@@ -1,29 +1,33 @@
 import urllib2
 import csv
-import psycopg2
 import os
 from stock import Stock
+from database import DatabaseGateway
 from var_dump import var_dump
 from settings import Helper
 
-DATABASE_URL = os.environ['DATABASE_URL']
-
-#connect to database
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-cursor = conn.cursor()
-try:
-    cursor.execute("SELECT * from historical_prices")
-except psycopg2.Error as e:
-    print e.pgerror
-    pass
-
-print(cursor.fetchall())
 
 helper = Helper()
-url = helper.getPriceHistoryUrl("AMZN", "XNAS")
+for stock in helper.stockList:
+    helper.resetURL()
+    print(stock)
+    url = helper.getPriceHistoryUrl(exchangeAndStock = stock)
+    dataResponse = urllib2.urlopen(url=url)
+    dataCsv = csv.reader(dataResponse)
 
-#response = urllib2.urlopen(url)
-#cr = csv.reader(response)
 
-#for row in cr:
-#    print(row)
+    #connect to database
+    db = DatabaseGateway()
+    db.connect()
+
+    j = 0
+    for row in dataCsv:
+        if (j > 1):
+            row[5] = row[5].replace(',','')
+            try:
+                row[5] = int(row[5])
+            except ValueError:
+                row[5] = 0
+            isError = db.insertHistroicalPrice(row, stock)
+        j = j + 1
+    db.close()
