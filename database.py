@@ -3,7 +3,7 @@ import psycopg2
 
 class DatabaseGateway():
 
-    def __init__(self, env):
+    def __init__(self):
 #        if (env == "LOCAL"):
 #            self.DATABASE_URL = DatabasePrivateSettings.DATABASE_URL
 #        else:
