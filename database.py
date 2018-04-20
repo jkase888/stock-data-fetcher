@@ -1,4 +1,5 @@
 import psycopg2
+import os
 #from database_private import DatabasePrivateSettings
 
 class DatabaseGateway():

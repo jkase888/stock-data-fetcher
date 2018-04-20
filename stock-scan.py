@@ -1,6 +1,5 @@
 import urllib2
 import csv
-import os
 from stock import Stock
 from database import DatabaseGateway
 from var_dump import var_dump
