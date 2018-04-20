@@ -8,6 +8,7 @@ class DatabaseGateway():
     def __init__(self, env):
         if (env == "LOCAL"):
             #self.DATABASE_URL = DatabasePrivateSettings.DATABASE_URL
+            pass
         else:
             self.DATABASE_URL = os.environ['DATABASE_URL']
 
