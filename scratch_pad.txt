@@ -1,0 +1,20 @@
+SELECT pg_terminate_backend(pg_stat_activity.pid)
+FROM pg_stat_activity
+WHERE pg_stat_activity.datname = 'dfoqfh283sdh2b'
+  AND pid <> pg_backend_pid();
+
+
+  select close from historical_prices
+  where symbol = 'XNAS:FB'
+  order by datestamp desc
+  limit 1
+
+
+  select max(high), min(low) from
+  (select * from historical_prices
+  where
+  	datestamp > (CURRENT_DATE - 30) and
+  	symbol = 'XNAS:FB'
+  order by datestamp desc
+  limit 14
+  ) as williamMax
